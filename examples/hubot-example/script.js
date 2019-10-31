@@ -5,10 +5,11 @@
 
 // module.exports = (robot) => {
 
-const { App, directMention } = require('../../dist');
+const { App, Logger, directMention } = require('../../dist');
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   token: process.env.SLACK_BOT_TOKEN,
+  logger: debug
 });
 
 (async () => {
@@ -238,6 +239,7 @@ app.message(directMention(), 'sleep it off', async ({ context, say }) => {
   try {
     await context.updateConversation({ ...context.conversation, sodasHad: 0 });
     say('zzzzz');
+    say('good night')
   } catch (error) {
     console.error(error);
   }
